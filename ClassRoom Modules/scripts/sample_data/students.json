@@ -1,0 +1,142 @@
+[
+  {
+    "student_id": "S2026001",
+    "first_name": "Emma",
+    "last_name": "Johnson",
+    "grade_level": 12,
+    "graduation_year": 2026
+  },
+  {
+    "student_id": "S2026002",
+    "first_name": "Liam",
+    "last_name": "Williams",
+    "grade_level": 12,
+    "graduation_year": 2026
+  },
+  {
+    "student_id": "S2026003",
+    "first_name": "Olivia",
+    "last_name": "Brown",
+    "grade_level": 12,
+    "graduation_year": 2026
+  },
+  {
+    "student_id": "S2027001",
+    "first_name": "Noah",
+    "last_name": "Davis",
+    "grade_level": 11,
+    "graduation_year": 2027
+  },
+  {
+    "student_id": "S2027002",
+    "first_name": "Ava",
+    "last_name": "Miller",
+    "grade_level": 11,
+    "graduation_year": 2027
+  },
+  {
+    "student_id": "S2027003",
+    "first_name": "Ethan",
+    "last_name": "Wilson",
+    "grade_level": 11,
+    "graduation_year": 2027
+  },
+  {
+    "student_id": "S2027004",
+    "first_name": "Sophia",
+    "last_name": "Moore",
+    "grade_level": 11,
+    "graduation_year": 2027
+  },
+  {
+    "student_id": "S2028001",
+    "first_name": "Mason",
+    "last_name": "Taylor",
+    "grade_level": 10,
+    "graduation_year": 2028
+  },
+  {
+    "student_id": "S2028002",
+    "first_name": "Isabella",
+    "last_name": "Anderson",
+    "grade_level": 10,
+    "graduation_year": 2028
+  },
+  {
+    "student_id": "S2028003",
+    "first_name": "James",
+    "last_name": "Thomas",
+    "grade_level": 10,
+    "graduation_year": 2028
+  },
+  {
+    "student_id": "S2028004",
+    "first_name": "Mia",
+    "last_name": "Jackson",
+    "grade_level": 10,
+    "graduation_year": 2028
+  },
+  {
+    "student_id": "S2028005",
+    "first_name": "Benjamin",
+    "last_name": "White",
+    "grade_level": 10,
+    "graduation_year": 2028
+  },
+  {
+    "student_id": "S2029001",
+    "first_name": "Charlotte",
+    "last_name": "Harris",
+    "grade_level": 9,
+    "graduation_year": 2029
+  },
+  {
+    "student_id": "S2029002",
+    "first_name": "Lucas",
+    "last_name": "Martin",
+    "grade_level": 9,
+    "graduation_year": 2029
+  },
+  {
+    "student_id": "S2029003",
+    "first_name": "Amelia",
+    "last_name": "Garcia",
+    "grade_level": 9,
+    "graduation_year": 2029
+  },
+  {
+    "student_id": "S2029004",
+    "first_name": "Henry",
+    "last_name": "Rodriguez",
+    "grade_level": 9,
+    "graduation_year": 2029
+  },
+  {
+    "student_id": "S2029005",
+    "first_name": "Harper",
+    "last_name": "Martinez",
+    "grade_level": 9,
+    "graduation_year": 2029
+  },
+  {
+    "student_id": "S2029006",
+    "first_name": "Alexander",
+    "last_name": "Lee",
+    "grade_level": 9,
+    "graduation_year": 2029
+  },
+  {
+    "student_id": "S2029007",
+    "first_name": "Evelyn",
+    "last_name": "Lopez",
+    "grade_level": 9,
+    "graduation_year": 2029
+  },
+  {
+    "student_id": "S2029008",
+    "first_name": "Sebastian",
+    "last_name": "Gonzalez",
+    "grade_level": 9,
+    "graduation_year": 2029
+  }
+]

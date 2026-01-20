@@ -1,0 +1,127 @@
+# ==============================================================================
+# wsl.conf - Per-Distribution WSL2 Configuration
+# ==============================================================================
+# Location: /etc/wsl.conf (inside WSL2 Ubuntu)
+# 
+# Create this file with: sudo nano /etc/wsl.conf
+# After editing, restart WSL with: wsl.exe --shutdown (from PowerShell)
+# 
+# Purpose: Configures Ubuntu behavior, systemd, file permissions, networking
+# Machine: DESKTOP-6NMJEGK
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# BOOT CONFIGURATION
+# ------------------------------------------------------------------------------
+[boot]
+# Enable systemd for proper service management (Docker needs this)
+# Requires WSL 0.67.6+ (you have 2.6.3.0 ✓)
+systemd=true
+
+# Optional: Run commands on WSL startup
+# command="service docker start"
+
+# ------------------------------------------------------------------------------
+# AUTOMOUNT CONFIGURATION
+# ------------------------------------------------------------------------------
+# Controls how Windows drives (C:\, D:\, etc.) are mounted in WSL
+[automount]
+
+# Enable automatic mounting of Windows drives
+enabled=true
+
+# Mount Windows drives under /mnt/ (e.g., /mnt/c, /mnt/d)
+root=/mnt/
+
+# Process /etc/fstab on startup (for custom mount points)
+mountFsTab=true
+
+# CRITICAL: Set proper file permissions for Windows drives
+# This fixes permission issues when accessing /mnt/c from WSL
+options="metadata,umask=022,fmask=11,dmask=022,case=off"
+
+# Explanation of options:
+# - metadata: Enables Linux permissions on Windows files
+# - umask=022: Default permissions (rwxr-xr-x for dirs, rw-r--r-- for files)
+# - fmask=11: Files get 664 (rw-rw-r--)
+# - dmask=022: Directories get 755 (rwxr-xr-x)
+# - case=off: Case-insensitive (Windows default behavior)
+
+# ------------------------------------------------------------------------------
+# NETWORK CONFIGURATION
+# ------------------------------------------------------------------------------
+[network]
+
+# Generate /etc/hosts file automatically
+generateHosts=true
+
+# Generate /etc/resolv.conf for DNS
+generateResolvConf=true
+
+# Optional: Set custom hostname (defaults to Windows hostname)
+# hostname=DESKTOP-6NMJEGK
+
+# ------------------------------------------------------------------------------
+# INTEROPERABILITY CONFIGURATION
+# ------------------------------------------------------------------------------
+# Controls interaction between Windows and WSL
+[interop]
+
+# Enable running Windows executables from WSL (e.g., code.exe, explorer.exe)
+enabled=true
+
+# Append Windows PATH to WSL PATH
+# Set to false if you want pure Linux environment
+appendWindowsPath=true
+
+# ------------------------------------------------------------------------------
+# USER CONFIGURATION
+# ------------------------------------------------------------------------------
+[user]
+
+# Set default user when WSL starts
+# Replace 'username' with your actual WSL username
+# default=username
+
+# ------------------------------------------------------------------------------
+# FILE SYSTEM CONFIGURATION (Advanced)
+# ------------------------------------------------------------------------------
+# [filesystem]
+# 
+# umask for WSL filesystem (not Windows mounts)
+# umask=022
+
+# ==============================================================================
+# VERIFICATION STEPS
+# ==============================================================================
+# 
+# After creating this file:
+# 
+# 1. Save and exit (Ctrl+X, then Y, then Enter)
+# 2. Exit WSL: exit
+# 3. Shutdown WSL from PowerShell: wsl --shutdown
+# 4. Restart WSL: wsl
+# 5. Verify systemd: systemctl list-unit-files --type=service
+# 6. Check mounts: mount | grep /mnt
+# 7. Verify Docker: sudo systemctl status docker
+# 
+# ==============================================================================
+
+# ==============================================================================
+# TROUBLESHOOTING
+# ==============================================================================
+# 
+# If systemd doesn't start:
+#   - Check WSL version: wsl --version (need 0.67.6+)
+#   - Update WSL: wsl --update
+# 
+# If Docker won't start:
+#   - Ensure systemd=true is set
+#   - Run: sudo systemctl enable docker
+#   - Run: sudo systemctl start docker
+# 
+# If permissions are wrong on /mnt/c:
+#   - Verify metadata option is in [automount] options
+#   - Shutdown and restart WSL
+# 
+# ==============================================================================

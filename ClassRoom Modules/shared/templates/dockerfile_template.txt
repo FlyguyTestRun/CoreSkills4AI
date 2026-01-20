@@ -1,0 +1,114 @@
+# ==============================================================================
+# Multi-Stage Dockerfile - Python Application
+# ==============================================================================
+# Purpose: Production-grade containerized Python application
+# Optimization: Multi-stage build for smaller final image
+# Machine: DESKTOP-6NMJEGK (12GB RAM - memory-efficient build)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# STAGE 1: Builder - Install dependencies and compile
+# ------------------------------------------------------------------------------
+FROM python:3.11-slim AS builder
+
+# Set build arguments
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Set working directory
+WORKDIR /build
+
+# Install system dependencies needed for compilation
+# Keep minimal to reduce layer size
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    make \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy only requirements first (layer caching optimization)
+# This layer is cached unless requirements.txt changes
+COPY requirements.txt .
+
+# Create virtual environment and install dependencies
+# Using --no-cache-dir reduces image size
+RUN python -m venv /opt/venv && \
+    /opt/venv/bin/pip install --upgrade pip && \
+    /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+
+# ------------------------------------------------------------------------------
+# STAGE 2: Runtime - Final lightweight image
+# ------------------------------------------------------------------------------
+FROM python:3.11-slim AS runtime
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PATH="/opt/venv/bin:$PATH" \
+    DEBIAN_FRONTEND=noninteractive
+
+# Set working directory
+WORKDIR /app
+
+# Install only runtime dependencies (no build tools)
+RUN apt-get update && apt-get install -y \
+    libpq5 \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Copy virtual environment from builder stage
+COPY --from=builder /opt/venv /opt/venv
+
+# Create non-root user for security
+RUN groupadd -r appuser && \
+    useradd -r -g appuser -u 1000 appuser && \
+    chown -R appuser:appuser /app
+
+# Copy application code
+# Do this last to maximize cache hits
+COPY --chown=appuser:appuser . .
+
+# Switch to non-root user
+USER appuser
+
+# Expose port (adjust as needed)
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Default command (override in docker-compose.yml)
+CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+# ==============================================================================
+# BUILD INSTRUCTIONS
+# ==============================================================================
+# 
+# Build image:
+#   docker build -t my-app:latest .
+# 
+# Build with custom tag:
+#   docker build -t my-app:v1.0.0 .
+# 
+# Build with build args:
+#   docker build --build-arg PYTHON_VERSION=3.11 -t my-app:latest .
+# 
+# Run container:
+#   docker run -p 8000:8000 my-app:latest
+# 
+# ==============================================================================
+
+# ==============================================================================
+# OPTIMIZATION NOTES FOR STUDENTS
+# ==============================================================================
+# 
+# 1. Multi-stage builds reduce final image size by 50-70%
+# 2. Layer caching: order matters! Change least often first
+# 3. Non-root user improves security
+# 4. .dockerignore prevents copying unnecessary files
+# 5. Health checks enable automatic container recovery
+# 6. PYTHONUNBUFFERED ensures logs appear in real-time
+# 
+# ==============================================================================

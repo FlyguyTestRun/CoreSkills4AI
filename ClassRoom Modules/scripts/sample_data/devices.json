@@ -1,0 +1,86 @@
+[
+  {
+    "device_id": "WIN-LAB-001",
+    "device_name": "Lab Computer 1",
+    "device_type": "Windows Workstation",
+    "assigned_to": "S2026001",
+    "compliance_status": "compliant"
+  },
+  {
+    "device_id": "WIN-LAB-002",
+    "device_name": "Lab Computer 2",
+    "device_type": "Windows Workstation",
+    "assigned_to": "S2027001",
+    "compliance_status": "compliant"
+  },
+  {
+    "device_id": "MAC-LAB-001",
+    "device_name": "Mac Lab 1",
+    "device_type": "MacBook Pro",
+    "assigned_to": "S2028001",
+    "compliance_status": "compliant"
+  },
+  {
+    "device_id": "IPAD-001",
+    "device_name": "iPad Pro 1",
+    "device_type": "iPad",
+    "assigned_to": "S2029001",
+    "compliance_status": "non-compliant"
+  },
+  {
+    "device_id": "WIN-LAB-003",
+    "device_name": "Lab Computer 3",
+    "device_type": "Windows Workstation",
+    "assigned_to": "S2026002",
+    "compliance_status": "pending"
+  },
+  {
+    "device_id": "CHR-001",
+    "device_name": "Chromebook 1",
+    "device_type": "Chromebook",
+    "assigned_to": "S2027002",
+    "compliance_status": "compliant"
+  },
+  {
+    "device_id": "CHR-002",
+    "device_name": "Chromebook 2",
+    "device_type": "Chromebook",
+    "assigned_to": "S2028002",
+    "compliance_status": "compliant"
+  },
+  {
+    "device_id": "WIN-LAB-004",
+    "device_name": "Lab Computer 4",
+    "device_type": "Windows Workstation",
+    "assigned_to": "S2029002",
+    "compliance_status": "non-compliant"
+  },
+  {
+    "device_id": "MAC-LAB-002",
+    "device_name": "Mac Lab 2",
+    "device_type": "MacBook Air",
+    "assigned_to": "S2026003",
+    "compliance_status": "compliant"
+  },
+  {
+    "device_id": "IPAD-002",
+    "device_name": "iPad Air 1",
+    "device_type": "iPad",
+    "assigned_to": "S2027003",
+    "compliance_status": "pending"
+  },
+  {
+    "device_id": "WIN-LAB-005",
+    "device_name": "Lab Computer 5",
+    "device_type": "Windows Workstation",
+    "assigned_to": null,
+    "compliance_status": "compliant"
+  },
+  {
+    "device_id": "CHR-003",
+    "device_name": "Chromebook 3",
+    "device_type": "Chromebook",
+    "assigned_to": null,
+    "compliance_status": "compliant"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "policy_name": "Password Complexity",
+    "policy_type": "security",
+    "description": "Require 12+ characters, mixed case, numbers, and special characters",
+    "applies_to": "all_users",
+    "enforcement_level": "required"
+  },
+  {
+    "policy_name": "Antivirus Required",
+    "policy_type": "security",
+    "description": "Windows Defender or approved antivirus must be active and updated",
+    "applies_to": "windows_devices",
+    "enforcement_level": "required"
+  },
+  {
+    "policy_name": "Screen Lock Timeout",
+    "policy_type": "security",
+    "description": "Auto-lock after 5 minutes of inactivity",
+    "applies_to": "all_devices",
+    "enforcement_level": "recommended"
+  },
+  {
+    "policy_name": "Software Updates",
+    "policy_type": "compliance",
+    "description": "OS updates must be applied within 30 days of release",
+    "applies_to": "all_devices",
+    "enforcement_level": "required"
+  },
+  {
+    "policy_name": "Disk Encryption",
+    "policy_type": "security",
+    "description": "BitLocker (Windows) or FileVault (Mac) must be enabled",
+    "applies_to": "windows_mac_devices",
+    "enforcement_level": "required"
+  },
+  {
+    "policy_name": "Network Restrictions",
+    "policy_type": "network",
+    "description": "Only approved Wi-Fi networks allowed for school work",
+    "applies_to": "all_devices",
+    "enforcement_level": "recommended"
+  },
+  {
+    "policy_name": "Browser Security",
+    "policy_type": "security",
+    "description": "Safe browsing enabled, pop-up blocker active",
+    "applies_to": "all_devices",
+    "enforcement_level": "required"
+  }
+]
