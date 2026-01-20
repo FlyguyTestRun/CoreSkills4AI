@@ -1,0 +1,89 @@
+# ==============================================================================
+# .wslconfig - Global WSL2 Resource Configuration
+# ==============================================================================
+# Location: C:\Users\<YourUsername>\.wslconfig
+# 
+# Purpose: Limits WSL2 memory and CPU usage to prevent system slowdown
+# Machine: DESKTOP-6NMJEGK (Intel i7-6500U, 12GB RAM, 4 threads)
+# 
+# CRITICAL: After editing, restart WSL with: wsl --shutdown
+# Then start WSL again to apply changes
+# ==============================================================================
+
+[wsl2]
+# ------------------------------------------------------------------------------
+# MEMORY ALLOCATION
+# ------------------------------------------------------------------------------
+# Limit WSL2 to 6GB RAM (50% of total 12GB)
+# Leaves 6GB for Windows + VS Code + browser
+memory=6GB
+
+# ------------------------------------------------------------------------------
+# CPU ALLOCATION
+# ------------------------------------------------------------------------------
+# Allocate 3 of 4 available processor threads to WSL2
+# Keeps 1 thread reserved for Windows responsiveness
+processors=3
+
+# ------------------------------------------------------------------------------
+# SWAP CONFIGURATION
+# ------------------------------------------------------------------------------
+# Set swap to 2GB (emergency overflow for memory spikes)
+# HDD-based swap is slow, so keep it minimal
+swap=2GB
+
+# Disable creating swap file on Windows drive (performance optimization)
+# We'll use WSL's internal swap management instead
+swapFile=C:\\Users\\Bryan\\AppData\\Local\\Temp\\wsl-swap.vhdx
+
+# ------------------------------------------------------------------------------
+# VIRTUAL DISK SETTINGS
+# ------------------------------------------------------------------------------
+# Enable automatic memory reclaim when WSL is idle
+# This returns unused memory to Windows
+autoMemoryReclaim=gradual
+
+# Limit virtual hard disk (vhdx) to 512GB max
+# Your WSL2 filesystem won't exceed this size
+localhostForwarding=true
+
+# ------------------------------------------------------------------------------
+# NETWORK CONFIGURATION
+# ------------------------------------------------------------------------------
+# Use mirrored networking (better for Docker Desktop)
+# Available in WSL 2.0.0+ (you have 2.6.3.0)
+networkingMode=mirrored
+
+# Enable DNS tunneling for better network performance
+dnsTunneling=true
+
+# Auto proxy helps with corporate networks (safe to enable)
+autoProxy=true
+
+# ------------------------------------------------------------------------------
+# PERFORMANCE OPTIMIZATIONS
+# ------------------------------------------------------------------------------
+# Use sparse VHD (disk image grows dynamically, doesn't pre-allocate)
+sparseVhd=true
+
+# Enable nested virtualization (needed for Docker-in-Docker scenarios)
+nestedVirtualization=true
+
+# Set page reporting (helps with memory reclaim)
+pageReporting=true
+
+# ------------------------------------------------------------------------------
+# DEBUGGING (Optional - comment out in production)
+# ------------------------------------------------------------------------------
+# debugConsole=true
+# vmIdleTimeout=60000
+
+# ==============================================================================
+# NOTES AND INSTRUCTIONS
+# ==============================================================================
+# 1. Replace <YourUsername> with your actual Windows username
+# 2. After creating this file, run: wsl --shutdown
+# 3. Verify settings with: wsl --status
+# 4. Monitor resource usage in Task Manager → "Vmmem" process
+# 5. If system still slow, reduce memory to 4GB and processors to 2
+# ==============================================================================

@@ -1,0 +1,14 @@
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+  
+  db-network:
+    driver: bridge
+    internal: true
+  
+  mcp-network:
+    driver: bridge

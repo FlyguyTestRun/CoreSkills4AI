@@ -2,25 +2,6 @@
 # C:\Shaw Unified Repository - .gitignore
 # ============================================
 
-
-
-
-# -------------------- Folders --------------------
-# Folders and files to be ignored by Git for Shaw Unified Repository projects.
-automation
-docker
-worktrees/*
-Projects/*
-HELP_DOCUMENTS/
-Claude Worktrees/
-
-
-
-# ============================================
-
-
-
-
 # -------------------- Python --------------------
 # Virtual environments
 .venv/
@@ -42,8 +23,6 @@ build/
 *.whl
 .Python
 
-
-
 # Pytest
 .pytest_cache/
 .coverage
@@ -58,6 +37,7 @@ htmlcov/
 # VS Code
 .vscode/
 *.code-workspace
+CoreSkills4ai.code-workspace
 
 # JetBrains (PyCharm, IntelliJ, etc.)
 .idea/
@@ -172,7 +152,6 @@ nul
 .claude/logs/
 .claude/settings.local.json
 .claude
-# Claude Code (keep settings, ignore temp files)
 .claude/*.tmp
 .claude/cache/
 
@@ -194,12 +173,6 @@ coverage/
 local/
 .local/
 
-# Claude Code (keep settings, ignore temp files)
-.claude/*.tmp
-.claude/cache/
-
-
-
 # -------------------- Classroom Materials --------------------
 # Student submission folders (if applicable)
 classroom-materials/*/submissions/
@@ -208,22 +181,13 @@ classroom-materials/*/student-work/
 # Initialization scripts (one-time use)
 Initialize Docs/
 
-# Obsolete documentation (kept locally for reference)
-DEMO.md
-GRAFANA_SETUP.md
-SETUP_INSTRUCTIONS.md
-TODO.md
-NEXT_STEPS.md
-FILES_TO_REMOVE.md
-
-# Folders for local use only
-automation
-
 # -------------------- Shared Resources --------------------
 # Large media files (comment if needed)
 *.mp4
 *.mov
 *.avi
+*.pdf
+*.zip
 
 # -------------------- Git --------------------
 # Keep these for reference
@@ -231,14 +195,20 @@ automation
 # .gitignore
 requirements.txt
 
+# -------------------- Folders --------------------
+# Folders and files only for local use, to be ignored by Git.
+Claude Worktrees/
+OPEN-Contracts/
+CLAUDEMD_Examples/
 
-# -------------------- Personal/Career --------------------
-
+# -------------------- Personal/Consulting Work -----------
 INTERVIEW_PREP.md
 LINKEDIN_POST.md
 PORTFOLIO_PRESENTATION.md
-Shaw_Objectives.md
+Shaw_Objectives.md  
 2026_ESSENTIAL_AI_TOPICS.md
 COMPLETED_TASKS.md
+DEPLOYMENT.md
+Project_Scope.md
+RECOMMENDATIONS.md
 SESSION_3_PLAN.md
-\coreskills4ai\GitHub\Modules\Ideas for Modules\Shaw_Objectives.md

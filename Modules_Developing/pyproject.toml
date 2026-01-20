@@ -1,0 +1,14 @@
+[project]
+name = "agentic-core"
+version = "0.1.0"
+description = "Agentic multi-agent system"
+requires-python = ">=3.13"
+
+dependencies = []
+
+[project.scripts]
+mcp-youtube-transcript = "core.runtime:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,274 @@
+# ==============================================================================
+# docker-compose.yml - Multi-Service Application Stack
+# ==============================================================================
+# Purpose: Orchestrate containers for web app, database, cache, and MCP services
+# Machine: DESKTOP-6NMJEGK (12GB RAM - resource limits applied)
+# Usage: docker-compose up -d
+# ==============================================================================
+
+version: '3.8'
+
+# ------------------------------------------------------------------------------
+# SERVICES DEFINITION
+# ------------------------------------------------------------------------------
+services:
+  
+  # ----------------------------------------------------------------------------
+  # WEB APPLICATION SERVICE
+  # ----------------------------------------------------------------------------
+  web:
+    # Build from local Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Container name (easier to reference)
+    container_name: ${PROJECT_NAME:-myapp}-web
+    
+    # Resource limits (critical for 12GB laptop)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'      # Max 1 CPU core
+          memory: 1G        # Max 1GB RAM
+        reservations:
+          cpus: '0.5'       # Guaranteed 0.5 CPU
+          memory: 512M      # Guaranteed 512MB RAM
+    
+    # Environment variables
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-myapp}
+      - REDIS_URL=redis://cache:6379/0
+      - LOG_LEVEL=INFO
+    
+    # Port mapping (host:container)
+    ports:
+      - "8000:8000"
+    
+    # Volume mounts
+    volumes:
+      # Mount source code for live development
+      - ./src:/app/src:ro  # :ro = read-only for security
+      
+      # Shared data volume
+      - app-data:/app/data
+    
+    # Depends on these services starting first
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Networks
+    networks:
+      - app-network
+      - db-network
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+  
+  # ----------------------------------------------------------------------------
+  # DATABASE SERVICE (PostgreSQL)
+  # ----------------------------------------------------------------------------
+  db:
+    image: postgres:15-alpine
+    container_name: ${PROJECT_NAME:-myapp}-db
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    
+    # Environment variables
+    environment:
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - POSTGRES_DB=${DB_NAME:-myapp}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    
+    # Persistent volume for database
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      
+      # Optional: initialization scripts
+      - ./docker/init-db:/docker-entrypoint-initdb.d:ro
+    
+    # Port mapping (optional - for external DB clients)
+    # Comment out in production for security
+    ports:
+      - "5432:5432"
+    
+    restart: unless-stopped
+    
+    networks:
+      - db-network
+    
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  # ----------------------------------------------------------------------------
+  # CACHE SERVICE (Redis)
+  # ----------------------------------------------------------------------------
+  cache:
+    image: redis:7-alpine
+    container_name: ${PROJECT_NAME:-myapp}-cache
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    
+    # Redis configuration
+    command: redis-server --maxmemory 200mb --maxmemory-policy allkeys-lru
+    
+    volumes:
+      - cache-data:/data
+    
+    ports:
+      - "6379:6379"
+    
+    restart: unless-stopped
+    
+    networks:
+      - app-network
+    
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  
+  # ----------------------------------------------------------------------------
+  # MCP SERVICE (Model Context Protocol)
+  # ----------------------------------------------------------------------------
+  # This service runs on-demand, not always active
+  mcp-service:
+    image: mcp-server:latest  # Replace with actual MCP image
+    container_name: ${PROJECT_NAME:-myapp}-mcp
+    
+    # Resource limits (conservative)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    
+    environment:
+      - MCP_PORT=8001
+      - MCP_LOG_LEVEL=INFO
+    
+    ports:
+      - "8001:8001"
+    
+    # Profile: only start when explicitly requested
+    # Usage: docker-compose --profile mcp up -d
+    profiles:
+      - mcp
+    
+    restart: "no"  # Don't auto-restart (on-demand only)
+    
+    networks:
+      - mcp-network
+
+# ------------------------------------------------------------------------------
+# NETWORKS
+# ------------------------------------------------------------------------------
+networks:
+  # Application network (web + cache)
+  app-network:
+    driver: bridge
+  
+  # Database network (web + db, isolated from cache)
+  db-network:
+    driver: bridge
+    internal: true  # No external access
+  
+  # MCP network (isolated)
+  mcp-network:
+    driver: bridge
+
+# ------------------------------------------------------------------------------
+# VOLUMES (Persistent Data)
+# ------------------------------------------------------------------------------
+volumes:
+  # Database data (persists between container restarts)
+  db-data:
+    driver: local
+  
+  # Application data
+  app-data:
+    driver: local
+  
+  # Cache data (optional persistence)
+  cache-data:
+    driver: local
+
+# ==============================================================================
+# USAGE INSTRUCTIONS
+# ==============================================================================
+#
+# Start all services:
+#   docker-compose up -d
+#
+# Start specific service:
+#   docker-compose up -d web
+#
+# Start with MCP service:
+#   docker-compose --profile mcp up -d
+#
+# View logs:
+#   docker-compose logs -f web
+#
+# Stop all services:
+#   docker-compose down
+#
+# Stop and remove volumes (CAUTION: deletes data):
+#   docker-compose down -v
+#
+# Rebuild containers:
+#   docker-compose build
+#
+# Check resource usage:
+#   docker stats
+#
+# ==============================================================================
+
+# ==============================================================================
+# PERFORMANCE OPTIMIZATION NOTES
+# ==============================================================================
+#
+# 1. Resource limits prevent any service from hogging system resources
+# 2. Profiles allow on-demand service activation (MCP only when needed)
+# 3. Health checks enable automatic recovery from failures
+# 4. Networks isolate services for security and performance
+# 5. Volumes persist data across container restarts
+# 6. Alpine images minimize disk I/O (important on HDD)
+#
+# ==============================================================================

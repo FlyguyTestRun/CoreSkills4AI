@@ -1,0 +1,107 @@
+{
+  "//": "==============================================================================",
+  "//2": "VS Code Dev Container Configuration",
+  "//3": "==============================================================================",
+  "//4": "Purpose: Develop inside Docker containers with full IDE support",
+  "//5": "Location: .devcontainer/devcontainer.json",
+  "//6": "Machine: DESKTOP-6NMJEGK (12GB RAM - optimized settings)",
+  "//7": "==============================================================================",
+
+  "name": "Python Development Container",
+  
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  
+  "service": "web",
+  
+  "workspaceFolder": "/app",
+  
+  "shutdownAction": "stopCompose",
+  
+  "forwardPorts": [8000, 5432, 6379],
+  
+  "portsAttributes": {
+    "8000": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/venv/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.formatting.provider": "black",
+        "python.formatting.blackPath": "/opt/venv/bin/black",
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.analysis.typeCheckingMode": "basic",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/*.pyc": true,
+          ".pytest_cache": true,
+          ".mypy_cache": true
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-python.pylint",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "GitHub.copilot",
+        "ms-vscode.makefile-tools",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  },
+  
+  "postCreateCommand": "pip install -e .",
+  
+  "postStartCommand": "echo 'Container started successfully!'",
+  
+  "remoteUser": "appuser",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    }
+  },
+  
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/home/appuser/.gitconfig,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.ssh,target=/home/appuser/.ssh,type=bind,consistency=cached"
+  ],
+  
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1",
+    "ENVIRONMENT": "development"
+  },
+  
+  "runArgs": [
+    "--name=devcontainer-${localWorkspaceFolderBasename}"
+  ]
+}

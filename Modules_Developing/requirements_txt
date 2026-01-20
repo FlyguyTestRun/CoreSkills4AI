@@ -1,0 +1,222 @@
+# ==============================================================================
+# Python Dependencies
+# ==============================================================================
+# Location: requirements.txt
+# Purpose: Production application dependencies
+# Usage: pip install -r requirements.txt
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# WEB FRAMEWORK
+# ------------------------------------------------------------------------------
+# FastAPI - Modern, high-performance web framework
+fastapi==0.109.0
+
+# Uvicorn - ASGI server for running FastAPI
+uvicorn[standard]==0.27.0
+
+# Python multipart - Required for form data and file uploads
+python-multipart==0.0.6
+
+# ------------------------------------------------------------------------------
+# DATABASE
+# ------------------------------------------------------------------------------
+# asyncpg - Fast PostgreSQL driver for asyncio
+asyncpg==0.29.0
+
+# SQLAlchemy - SQL toolkit (optional, for ORM)
+# sqlalchemy==2.0.25
+# sqlalchemy[asyncio]==2.0.25
+
+# Alembic - Database migrations (optional)
+# alembic==1.13.1
+
+# ------------------------------------------------------------------------------
+# DATA VALIDATION
+# ------------------------------------------------------------------------------
+# Pydantic - Data validation using Python type hints
+pydantic==2.5.3
+pydantic[email]==2.5.3
+
+# ------------------------------------------------------------------------------
+# AUTHENTICATION & SECURITY
+# ------------------------------------------------------------------------------
+# python-jose - JWT token handling
+python-jose[cryptography]==3.3.0
+
+# passlib - Password hashing
+passlib[bcrypt]==1.7.4
+
+# python-dotenv - Environment variable management
+python-dotenv==1.0.0
+
+# ------------------------------------------------------------------------------
+# HTTP CLIENT
+# ------------------------------------------------------------------------------
+# httpx - Async HTTP client
+httpx==0.26.0
+
+# requests - Synchronous HTTP client
+requests==2.31.0
+
+# ------------------------------------------------------------------------------
+# CACHING & MESSAGE QUEUE
+# ------------------------------------------------------------------------------
+# redis - Redis client for caching
+redis==5.0.1
+
+# celery - Distributed task queue (optional)
+# celery==5.3.4
+
+# ------------------------------------------------------------------------------
+# UTILITIES
+# ------------------------------------------------------------------------------
+# python-dateutil - Date/time utilities
+python-dateutil==2.8.2
+
+# pytz - Timezone handling
+pytz==2023.3
+
+# ------------------------------------------------------------------------------
+# LOGGING & MONITORING
+# ------------------------------------------------------------------------------
+# python-json-logger - JSON formatted logs
+python-json-logger==2.0.7
+
+# sentry-sdk - Error tracking (optional)
+# sentry-sdk==1.39.2
+
+# prometheus-client - Metrics (optional)
+# prometheus-client==0.19.0
+
+# ------------------------------------------------------------------------------
+# TESTING
+# ------------------------------------------------------------------------------
+# pytest - Testing framework
+pytest==7.4.4
+
+# pytest-asyncio - Async test support
+pytest-asyncio==0.23.3
+
+# pytest-cov - Code coverage
+pytest-cov==4.1.0
+
+# pytest-mock - Mocking support
+pytest-mock==3.12.0
+
+# httpx - For testing async endpoints
+# (already listed above)
+
+# ------------------------------------------------------------------------------
+# CODE QUALITY
+# ------------------------------------------------------------------------------
+# black - Code formatter
+black==23.12.1
+
+# isort - Import sorter
+isort==5.13.2
+
+# pylint - Code linter
+pylint==3.0.3
+
+# flake8 - Code linter
+flake8==7.0.0
+
+# mypy - Static type checker
+mypy==1.8.0
+
+# bandit - Security linter
+bandit==1.7.6
+
+# ------------------------------------------------------------------------------
+# DEVELOPMENT TOOLS
+# ------------------------------------------------------------------------------
+# ipython - Enhanced Python shell
+ipython==8.19.0
+
+# ipdb - IPython debugger
+ipdb==0.13.13
+
+# watchfiles - File watcher for hot reload
+watchfiles==0.21.0
+
+# ------------------------------------------------------------------------------
+# DOCUMENTATION
+# ------------------------------------------------------------------------------
+# mkdocs - Documentation generator (optional)
+# mkdocs==1.5.3
+# mkdocs-material==9.5.3
+
+# ------------------------------------------------------------------------------
+# DATA PROCESSING (if needed)
+# ------------------------------------------------------------------------------
+# pandas - Data analysis (optional)
+# pandas==2.1.4
+
+# numpy - Numerical computing (optional)
+# numpy==1.26.2
+
+# ------------------------------------------------------------------------------
+# ML/AI (if needed)
+# ------------------------------------------------------------------------------
+# scikit-learn - Machine learning (optional)
+# scikit-learn==1.4.0
+
+# tensorflow - Deep learning (optional)
+# tensorflow==2.15.0
+
+# torch - PyTorch (optional)
+# torch==2.1.2
+
+# ==============================================================================
+# NOTES FOR STUDENTS
+# ==============================================================================
+#
+# Installing Dependencies:
+# 1. Install all: pip install -r requirements.txt
+# 2. Install specific: pip install fastapi uvicorn
+# 3. Upgrade all: pip install -r requirements.txt --upgrade
+#
+# Managing Dependencies:
+# 1. Add new package: pip install <package>
+# 2. Freeze current: pip freeze > requirements.txt
+# 3. Remove package: pip uninstall <package>
+#
+# Version Pinning:
+# - Exact version: package==1.2.3 (recommended for production)
+# - Minimum version: package>=1.2.3
+# - Compatible version: package~=1.2.3 (allows 1.2.x)
+# - Range: package>=1.2,<2.0
+#
+# Development vs Production:
+# - For production: Use exact versions (==)
+# - For development: Can use minimum versions (>=)
+# - Consider: requirements-dev.txt for dev-only packages
+#
+# Security:
+# - Run: pip install safety
+# - Check: safety check
+# - Update vulnerable packages immediately
+#
+# Docker Optimization:
+# - Copy requirements.txt before source code (better caching)
+# - Use --no-cache-dir with pip install (smaller images)
+# - Consider multi-stage builds
+#
+# ==============================================================================
+
+# ==============================================================================
+# OPTIONAL: requirements-dev.txt (Development Only)
+# ==============================================================================
+# Create a separate file for development dependencies:
+#
+# -r requirements.txt  # Include production requirements
+#
+# # Additional dev tools
+# jupyter==1.0.0
+# notebook==7.0.6
+# faker==22.0.0  # Generate fake data
+# factory-boy==3.3.0  # Test factories
+# locust==2.20.0  # Load testing
+#
+# ==============================================================================
