@@ -1,0 +1,242 @@
+# ============================================
+# C:\Shaw Unified Repository - .gitignore
+# ============================================
+
+
+
+
+# -------------------- Folders --------------------
+# Folders and files to be ignored by Git for Shaw Unified Repository projects.
+automation
+docker
+worktrees/*
+Projects/*
+HELP_DOCUMENTS/
+Claude Worktrees/
+
+
+
+# ============================================
+
+
+
+
+# -------------------- Python --------------------
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+*.virtualenv
+*.env.local
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+.Python
+
+
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# -------------------- IDEs & Editors --------------------
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains (PyCharm, IntelliJ, etc.)
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# -------------------- Operating Systems --------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# -------------------- Infrastructure --------------------
+# Docker
+infrastructure/docker/*.log
+infrastructure/volumes/
+infrastructure/data/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# -------------------- Secrets & Credentials --------------------
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Credentials and keys
+credentials.json
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+.secrets/
+
+# AWS
+.aws/
+
+# Azure
+.azure/
+
+# -------------------- Build Artifacts --------------------
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# -------------------- Node.js (if applicable) --------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# -------------------- Temporary Files --------------------
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.cache
+tmpclaude-*
+nul
+
+# Legacy/backup files
+*_old.py
+*_complex.py
+*_backup.*
+
+# Claude working files
+.claude/logs/
+.claude/settings.local.json
+.claude
+# Claude Code (keep settings, ignore temp files)
+.claude/*.tmp
+.claude/cache/
+
+# -------------------- Project Specific --------------------
+# Backup folders
+*_Backup_*/
+*_OLD/
+*_backup/
+
+# Old versions
+*.old
+*_old.*
+
+# Test outputs
+test-results/
+coverage/
+
+# Local development
+local/
+.local/
+
+# Claude Code (keep settings, ignore temp files)
+.claude/*.tmp
+.claude/cache/
+
+
+
+# -------------------- Classroom Materials --------------------
+# Student submission folders (if applicable)
+classroom-materials/*/submissions/
+classroom-materials/*/student-work/
+
+# Initialization scripts (one-time use)
+Initialize Docs/
+
+# Obsolete documentation (kept locally for reference)
+DEMO.md
+GRAFANA_SETUP.md
+SETUP_INSTRUCTIONS.md
+TODO.md
+NEXT_STEPS.md
+FILES_TO_REMOVE.md
+
+# Folders for local use only
+automation
+
+# -------------------- Shared Resources --------------------
+# Large media files (comment if needed)
+*.mp4
+*.mov
+*.avi
+
+# -------------------- Git --------------------
+# Keep these for reference
+# .gitattributes
+# .gitignore
+
+# -------------------- Personal/Career --------------------
+
+INTERVIEW_PREP.md
+LINKEDIN_POST.md
+PORTFOLIO_PRESENTATION.md
+Shaw_Objectives.md
+2026_ESSENTIAL_AI_TOPICS.md
+COMPLETED_TASKS.md
+SESSION_3_PLAN.md
+\coreskills4ai\GitHub\Modules\Ideas for Modules\Shaw_Objectives.md
