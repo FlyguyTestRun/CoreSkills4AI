@@ -239,7 +239,7 @@ The need for reliable production-scale ML/GenAI deployments. There is no univers
 *cloud ecosystem?(AWS, Azure, GCP)*, *team-size?*, *open-sourcevs.managed-preference*, *Kubernetes-usage*, *LLM/agent-focus*, *governance-needs*, and *budget?*
 Most teams combine specialized open-source tools (e.g., for tracking/versioning) with managed cloud platforms for end-to-end lifecycle management.
 
-##1. These are the principal frameworks dominating current AI development, training, and deployment:
+## 1. These are the principal frameworks dominating current AI development, training, and deployment:
 	- *PyTorch* - De-facto standard deep learning framework with dynamic computation graphs and strong research adoption; widely used for NLP, vision, and large model training.
 	- *TensorFlow* (TensorFlow 3.0) – Full-featured ML and deep learning platform with strong production tooling, MLOps integrations, and edge support (TensorFlow Lite).
 		-*Keras* – High-level neural network API focused on rapid experimentation, often running on TensorFlow backends.
@@ -247,11 +247,11 @@ Most teams combine specialized open-source tools (e.g., for tracking/versioning)
 	- Scikit-learn – Core Python library for traditional machine learning algorithms (classification, regression, clustering) and data preprocessing.
 	- JAX (with libraries like Flax) – High-performance ML library designed for scalable training and optimization with automatic differentiation and compilation via XLA
 
-##2. These frameworks support large-scale training, distributed systems, and performance optimization:
+## 2. These frameworks support large-scale training, distributed systems, and performance optimization:
 	- DeepSpeed – Microsoft’s optimization library for scalable, high-performance model training, especially for very large models.
 	- Horovod – Distributed training framework compatible with TensorFlow, PyTorch, and MXNet to scale training across multiple GPUs or nodes.
-
-##3. These frameworks extend or specialize core functionality for particular niches:
+	
+## 3. These frameworks extend or specialize core functionality for particular niches:
 	- LangChain / LlamaIndex – Emerging frameworks for building retrieval-augmented generation (RAG) systems and agentic workflows for LLMs.
 	- OpenVINO / ONNX Runtime – Optimized inference runtimes for hardware acceleration and cross-framework model execution.
 	- MindSpore – Huawei’s deep learning framework focused on efficient computation and cross-platform deployment.
