@@ -142,6 +142,7 @@ temp/
 *.cache
 tmpclaude-*
 nul
+pyHELPFILE.md
 
 # Legacy/backup files
 *_old.py
